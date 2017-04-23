@@ -34,3 +34,5 @@
 
 *.class
 *.h
+
+target/

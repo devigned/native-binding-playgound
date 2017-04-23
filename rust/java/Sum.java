@@ -1,6 +1,6 @@
 public class Sum{
     static{
-        System.loadLibrary("sum");
+        System.loadLibrary("rustjavasum");
     }
     public static native long sum(long x, long y);
 

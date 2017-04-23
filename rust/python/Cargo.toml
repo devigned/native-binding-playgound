@@ -1,0 +1,11 @@
+[package]
+name = "rustpysum"
+version = "0.1.0"
+
+[lib]
+name = "rustpysum"
+crate-type = ["cdylib"]
+
+[dependencies.cpython]
+version = "0.1"
+features = ["extension-module"]

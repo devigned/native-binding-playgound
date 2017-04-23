@@ -1,0 +1,10 @@
+[package]
+name = "rustjavasum"
+version = "0.1.0"
+
+[lib]
+name = "rustjavasum"
+crate-type = ["cdylib"]
+
+[dependencies]
+jni = { git = "https://github.com/prevoty/jni-rs" }

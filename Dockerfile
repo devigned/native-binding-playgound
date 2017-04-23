@@ -63,11 +63,9 @@ RUN set -x \
 RUN curl -fsSL "${GOLANG_DOWNLOAD_URL}" -o ./golang.tar.gz \
 	&& echo "${GOLANG_DOWNLOAD_SHA256}  golang.tar.gz" | sha256sum -c - \
 	&& tar -C /usr/local -xzf golang.tar.gz \
-	&& rm golang.tar.gz \
-    && curl https://sh.rustup.rs -sSf | sh
+	&& rm golang.tar.gz
 
 RUN useradd -ms /bin/bash builder
-
 RUN pip install --upgrade pip
 COPY go-wrapper /usr/local/bin/
 
@@ -76,7 +74,8 @@ ENV GOPATH ${USER_HOME}/go
 RUN mkdir -p "${GOPATH}/src" "${GOPATH}/bin" && chmod -R 777 "${GOPATH}"
 
 USER builder
-ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+ENV PATH $GOPATH/bin:/usr/local/go/bin:${USER_HOME}/.cargo/bin:$PATH
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
 
-WORKDIR ${USER_HOME}/binding/src
+WORKDIR ${USER_HOME}/binding/
 CMD bash
